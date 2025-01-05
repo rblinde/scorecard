@@ -1,6 +1,7 @@
-import { Player } from "@/lib/types";
+import { Player, Store } from "@/lib/types";
 
 export enum ActionTypes {
+  LOAD = "LOAD",
   RESET_ALL = "RESET_ALL",
   RESET_SCORES = "RESET_SCORES",
   ADD = "ADD",
@@ -11,6 +12,10 @@ export enum ActionTypes {
 }
 
 export type StoreAction =
+  | {
+      type: ActionTypes.LOAD;
+      value: Store;
+    }
   | {
       type: ActionTypes.RESET_ALL;
     }
@@ -37,6 +42,10 @@ export type StoreAction =
   | {
       type: ActionTypes.SORT;
     };
+
+export function load(value: Store): StoreAction {
+  return { type: ActionTypes.LOAD, value };
+}
 
 export function addPlayer(): StoreAction {
   return { type: ActionTypes.ADD };

@@ -4,6 +4,8 @@ import { Sort, Store } from "@/lib/types";
 
 export function reducer(store: Store, action: StoreAction): Store {
   switch (action.type) {
+    case ActionTypes.LOAD:
+      return action.value;
     case ActionTypes.RESET_ALL:
       return {
         ...store,

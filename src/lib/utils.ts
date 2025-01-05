@@ -13,3 +13,15 @@ export function sortPlayers(direction: Sort) {
 
   return (a: Player, b: Player) => a.score - b.score;
 }
+
+export function tryParse<T>(data: string | null): T | null {
+  if (!data) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(data);
+  } catch {
+    return null;
+  }
+}
