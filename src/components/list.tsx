@@ -17,11 +17,11 @@ export function List() {
             className="p-3 flex items-center justify-between border rounded-md shadow"
           >
             <div className="flex gap-2 items-center flex-1">
-              <span className="text-blue-600">#{i + 1}</span>
+              <span className="text-blue-500">#{i + 1}</span>
               <PlayerName player={player} />
             </div>
             <div className="flex gap-4 items-center">
-              <span className="font-semibold text-blue-900">{player.score}</span>
+              <span className="font-semibold text-blue-500">{player.score}</span>
               <ScoreButtons id={player.id} />
             </div>
           </div>
