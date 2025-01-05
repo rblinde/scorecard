@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Button } from "@/components/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/dialog";
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/drawer";
 import { Label } from "@/components/label";
 import { Input } from "@/components/input";
 
@@ -41,16 +42,16 @@ export function PlayerName({ player }: PlayerNameProps) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         <Button variant="ghost">{player.name}</Button>
-      </DialogTrigger>
-      <DialogContent className="p-4 gap-2 sm:max-w-[425px]">
+      </DrawerTrigger>
+      <DrawerContent className="p-4 gap-2 sm:max-w-[425px]">
         <form action={save}>
-          <DialogHeader>
-            <DialogTitle>Edit {player.name}</DialogTitle>
-            <DialogDescription>Rename or remove this player.</DialogDescription>
-          </DialogHeader>
+          <DrawerHeader>
+            <DrawerTitle>Edit {player.name}</DrawerTitle>
+            <DrawerDescription>Rename or remove this player.</DrawerDescription>
+          </DrawerHeader>
 
           <div className="flex flex-col gap-2 py-2">
             <Label htmlFor="name" className="text-sm">
@@ -59,16 +60,14 @@ export function PlayerName({ player }: PlayerNameProps) {
             <Input id="name" name="name" defaultValue={player.name} className="text-sm" />
           </div>
 
-          <DialogFooter>
-            <div className="flex flex-col gap-2">
-              <Button type="button" variant="secondary" onClick={remove}>
-                Remove
-              </Button>
-              <Button type="submit">Save changes</Button>
-            </div>
-          </DialogFooter>
+          <DrawerFooter>
+            <Button type="button" variant="secondary" onClick={remove}>
+              Remove
+            </Button>
+            <Button type="submit">Save changes</Button>
+          </DrawerFooter>
         </form>
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   );
 }
