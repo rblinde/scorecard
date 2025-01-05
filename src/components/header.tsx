@@ -13,6 +13,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/alert-dialog";
 import { Button } from "@/components/button";
+import { SortButton } from "@/components/sort-button";
 import { useStoreDispatch } from "@/lib/store";
 import { addPlayer, resetScores, resetState } from "@/lib/actions";
 
@@ -21,6 +22,8 @@ export function Header() {
 
   return (
     <div className="flex gap-2 justify-end">
+      <SortButton />
+
       <Button size="icon" onClick={() => dispatch(addPlayer())}>
         <UserPlus />
       </Button>

@@ -1,51 +1,22 @@
 "use client";
 
 import { createContext, Dispatch, useContext, useEffect, useReducer } from "react";
-import { ActionTypes, resetState, type StoreAction } from "@/lib/actions";
-import { generatePlayer, generatePlayers } from "@/lib/random";
-import { type Player } from "@/lib/types";
+import { resetState, type StoreAction } from "@/lib/actions";
+import { type Store, Sort } from "@/lib/types";
+import { reducer } from "@/lib/reducer";
 
-const StoreContext = createContext<Player[]>([]);
+const initialState = { players: [], sort: Sort.DESC };
+
+const StoreContext = createContext<Store>(initialState);
 
 const StoreDispatchContext = createContext<Dispatch<StoreAction>>(() => null);
 
-function reducer(store: Player[], action: StoreAction) {
-  switch (action.type) {
-    case ActionTypes.RESET_ALL:
-      return [...generatePlayers(2)];
-    case ActionTypes.RESET_SCORES:
-      return store.map((player) => ({ ...player, score: 0 }));
-    case ActionTypes.ADD:
-      return [...store, generatePlayer()];
-    case ActionTypes.REMOVE:
-      return store.filter((item) => item.id !== action.id);
-    case ActionTypes.SCORE:
-      return store.map((player) => {
-        if (player.id === action.id) {
-          return { ...player, score: player.score + action.delta };
-        } else {
-          return player;
-        }
-      });
-    case ActionTypes.CHANGE:
-      return store.map((player) => {
-        if (player.id === action.id) {
-          return { ...player, name: action.name };
-        } else {
-          return player;
-        }
-      });
-    default:
-      return store;
-  }
+interface StoreProviderProps {
+  children: React.ReactNode;
 }
 
-export function StoreProvider({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const [store, dispatch] = useReducer(reducer, []);
+export function StoreProvider({ children }: StoreProviderProps) {
+  const [store, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     dispatch(resetState());

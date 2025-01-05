@@ -7,6 +7,7 @@ export enum ActionTypes {
   REMOVE = "REMOVE",
   SCORE = "SCORE",
   CHANGE = "CHANGE",
+  SORT = "SORT",
 }
 
 export type StoreAction =
@@ -32,6 +33,9 @@ export type StoreAction =
       type: ActionTypes.CHANGE;
       id: Player["id"];
       name: Player["name"];
+    }
+  | {
+      type: ActionTypes.SORT;
     };
 
 export function addPlayer(): StoreAction {
@@ -56,4 +60,8 @@ export function updateScore(id: Player["id"], delta: number): StoreAction {
 
 export function changePlayerName(id: Player["id"], name: Player["name"]): StoreAction {
   return { type: ActionTypes.CHANGE, id, name };
+}
+
+export function sort(): StoreAction {
+  return { type: ActionTypes.SORT };
 }
