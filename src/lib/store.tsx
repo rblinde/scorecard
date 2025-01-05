@@ -1,33 +1,14 @@
 "use client";
 
-import { createContext, Dispatch, useContext, useEffect, useReducer } from "react";
-import { resetState, type StoreAction } from "@/lib/actions";
+import { createContext, Dispatch, useContext } from "react";
+import { type StoreAction } from "@/lib/actions";
 import { type Store, Sort } from "@/lib/types";
-import { reducer } from "@/lib/reducer";
 
-const initialState = { players: [], sort: Sort.DESC };
+export const initialState = { players: [], sort: Sort.DESC };
 
-const StoreContext = createContext<Store>(initialState);
+export const StoreContext = createContext<Store>(initialState);
 
-const StoreDispatchContext = createContext<Dispatch<StoreAction>>(() => null);
-
-interface StoreProviderProps {
-  children: React.ReactNode;
-}
-
-export function StoreProvider({ children }: StoreProviderProps) {
-  const [store, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    dispatch(resetState());
-  }, []);
-
-  return (
-    <StoreContext.Provider value={store}>
-      <StoreDispatchContext.Provider value={dispatch}>{children}</StoreDispatchContext.Provider>
-    </StoreContext.Provider>
-  );
-}
+export const StoreDispatchContext = createContext<Dispatch<StoreAction>>(() => null);
 
 export function useStore() {
   return useContext(StoreContext);
