@@ -45,27 +45,29 @@ export function PlayerName({ player }: PlayerNameProps) {
       <DrawerTrigger asChild>
         <Button variant="ghost">{player.name}</Button>
       </DrawerTrigger>
-      <DrawerContent className="p-4 gap-2 sm:max-w-[425px]">
-        <form action={save}>
-          <DrawerHeader>
-            <DrawerTitle>Edit {player.name}</DrawerTitle>
-            <DrawerDescription>Rename or remove this player.</DrawerDescription>
-          </DrawerHeader>
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-sm">
+          <form action={save}>
+            <DrawerHeader>
+              <DrawerTitle>Edit {player.name}</DrawerTitle>
+              <DrawerDescription>Rename or remove this player.</DrawerDescription>
+            </DrawerHeader>
 
-          <div className="flex flex-col gap-2 py-2">
-            <Label htmlFor="name" className="text-sm">
-              Name
-            </Label>
-            <Input id="name" name="name" defaultValue={player.name} className="text-sm" />
-          </div>
+            <div className="flex flex-col gap-2 px-4">
+              <Label htmlFor="name" className="text-sm">
+                Name
+              </Label>
+              <Input id="name" name="name" defaultValue={player.name} className="text-sm" />
+            </div>
 
-          <DrawerFooter>
-            <Button type="button" variant="secondary" onClick={remove}>
-              Remove
-            </Button>
-            <Button type="submit">Save changes</Button>
-          </DrawerFooter>
-        </form>
+            <DrawerFooter>
+              <Button type="button" variant="secondary" onClick={remove}>
+                Remove
+              </Button>
+              <Button type="submit">Save changes</Button>
+            </DrawerFooter>
+          </form>
+        </div>
       </DrawerContent>
     </Drawer>
   );
